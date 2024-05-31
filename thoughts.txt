@@ -1,0 +1,31 @@
+## so what do I need to do?
+## (done for now) Get rules if they don't already exist.
+    ## maybe have a json file that stores the settings
+    ## if none, takes the regulations and creates a list of rules
+    ## if exists, prompts, "want to see / edit rules or run?"
+    ## done.
+## run rules on the docs
+    ## import docs into var
+    ## send doc as context to morphism call
+        ## specify output, just have it be a pandas df? that feels sleek.
+    ## print out results that would be input on the form. Seems simple.
+
+
+## ok so now I need to generate the rules. It just needs to be a prompt that's fed. 
+    ## let's edit the prompt a lil bit.
+    ## still needs some work but this will be fine for a bit.
+
+## run the rules on the doc.
+    ## import the new doc
+    ## get info from it
+    ## ask GPT to look through the doc using the rules generated and output in a csv the info of the form submission.
+    ## print out the submission info for a human to look over.
+        ## next would include the CI of whether or not it's reliable data.
+
+
+# TODO
+    ## I don't like the initial user interaction, maybe it's fine for demoing though.
+    ## where am I at. running rules on the doc. which part of that?
+        ## we have the rules, next have a single file be importable
+        ## we've got program flow, but no items are being flagged right now, and that's an issue.
+            ## let's make sure that
