@@ -34,3 +34,10 @@
 
 Where am I at? I want to check out the context being sent
     so info is being sent....but is the formating correct.
+
+
+
+What do I need to ship?
+- I've got something that will get rules, take in a document and output a .csv for a human to look at. Good.
+- next I'd like to upload a single field to this pdf. 
+- and then I can mock how I'd upload to the website, I could mock with Chat, type the prompt and say, "if this upload was succesfful, reply 'nice job! this pdf was edited and uploaded' ".

@@ -121,6 +121,10 @@ def run_rules_on_document(document_path, file_type):
     header = lines[0].split(', ')
     rows = [line.split(', ') for line in lines[1:] if line.strip()]
 
+    # Debug prints
+    print("Header:", header)
+    print("Rows:", rows)
+
     # Ensure all rows have the same number of columns as the header
     for row in rows:
         if len(row) != len(header):

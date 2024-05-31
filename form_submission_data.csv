@@ -1,6 +1,8 @@
-idx,info about the purchase,amount,confidence interval that this item satisfies given rules (0-100%),date
-1,Gas Reimbursement for Trip to Sacramento,$150,60%,2/12/2024
-2,Gas Reimbursement to Meet with legislators in district offices,$50,60%,3/4/2024
-3,Charter Bus for volunteers to go to Sacramento for Lobby Day,$300,80%,4/2/2024
-4,Souvenir Chocolate from local producer as a gift for Rep. Pelosi Office and Staff,$72,50%,5/8/2024
-5,Retainer for Progressive Lobbying Firm,"$2,500",70%,2/1/2024
+idx,purpose of the purchase,amount,confidence interval that this satisfies rules,date
+0,T-Shirts supporting affordable housing legislation,$45.00,10,1/18/2024
+1,Charter Bus for volunteers,$300.00,10,1/25/2024
+2,Gas Reimbursement for trip to Sacramento,$150.00,10,2/12/2024
+3,Gas Reimbursement to meet with legislators,$50.00,4,3/4/2024
+4,Charter Bus for volunteers,$300.00,10,4/2/2024
+5,Souvenir Chocolate for Rep. Pelosi Office staff,$72.00,7,5/8/2024
+6,Retainer for Progressive Lobbying Firm,"$2,500.00",8,2/1/2024
