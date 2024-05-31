@@ -28,4 +28,9 @@
     ## where am I at. running rules on the doc. which part of that?
         ## we have the rules, next have a single file be importable
         ## we've got program flow, but no items are being flagged right now, and that's an issue.
-            ## let's make sure that
+            ## let's make sure that the LLM is actually getting input
+    ## I don't want it to assume anything and I'd like to change the prompt to reflect that.
+
+
+Where am I at? I want to check out the context being sent
+    so info is being sent....but is the formating correct.

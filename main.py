@@ -1,11 +1,13 @@
-import json
 import os
 import fitz  # PyMuPDF
 import pandas as pd
 from bs4 import BeautifulSoup
 from openai import OpenAI
 
+# Initialize OpenAI client
 client = OpenAI()
+
+# Path to the rules file
 rules_file_path = 'rules.txt'
 
 def load_rules():
@@ -22,12 +24,15 @@ def save_rules(rules):
     with open(rules_file_path, 'w') as file:
         file.write(rules)
 
-def textFromAI(prompt, text):
-    res = client.chat.completions.create(model = "gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": prompt},
-        {"role": "user", "content": text}
-    ])
+def textFromAI(prompt):
+    """Generate text from AI based on prompt and input text."""
+    res = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": ""}
+        ]
+    )
     story = res.choices[0].message.content
     return str(story)
 
@@ -46,7 +51,7 @@ def generate_rules_from_document(document_path):
     prompt = ("Generate a list of rules for an LLM to follow when reading further documents. "
               "The LLM will utilize these rules to analyze input data and see if items need to be "
               "included in a report (that the rules are based on) or flagged for review by a human.\n")
-    generated_rules = textFromAI(prompt, document_text)
+    generated_rules = textFromAI(prompt)
     save_rules(generated_rules)
     return generated_rules
 
@@ -87,7 +92,10 @@ def analyze_document_with_rules(document_text, rules):
     """Analyze the document using the generated rules and return the form submission data."""
     prompt = "Analyze the following document based on the given rules:\n\n"
     prompt += f"Rules:\n{rules}\n\nDocument:\n"
-    form_submission_data = textFromAI(prompt, document_text)
+    prompt += ("VERY IMPORTANT!!!! Please return the result in a csv file with the format of: "
+               "idx, info about the purchase, amount, confidence interval that this item satisfies given rules (0-100%), date")
+    prompt += "Please make sure to be robust in this, include all items that could possibly be included, but make sure to attach a confidence interval to let a human know if it needs to be reviewed."
+    form_submission_data = textFromAI(prompt + "\n" + document_text)
     return form_submission_data
 
 def run_rules_on_document(document_path, file_type):
@@ -108,7 +116,15 @@ def run_rules_on_document(document_path, file_type):
         return
     
     form_submission_data = analyze_document_with_rules(document_text, rules)
-    df = pd.DataFrame([form_submission_data])
+
+    # Split the response into lines and process it into a DataFrame
+    lines = form_submission_data.strip().split('\n')
+    header = lines[0].split(', ')
+    rows = [line.split(', ') for line in lines[1:] if line.strip()]
+
+    # Create DataFrame
+    df = pd.DataFrame(rows, columns=header)
+    
     output_csv_path = 'form_submission_data.csv'
     df.to_csv(output_csv_path, index=False)
     
